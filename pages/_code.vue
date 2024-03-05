@@ -4,7 +4,7 @@
       <div class="py-5 text-center">
         <h2>Welcome</h2>
         <p class="lead">
-          AMBASSADOR_NAME has invited you to buy these products
+          {{ user.first_name }} has invited you to buy these products
         </p>
       </div>
 
@@ -125,5 +125,14 @@ import Vue from 'vue'
 
 export default Vue.extend({
   name: 'IndexPage',
+  data() {
+    return {
+      user: null,
+    }
+  },
+  async asyncData({ params, $axios }) {
+    const { data } = await $axios.get(`links/${params.code}`)
+    return { user: data.user }
+  },
 })
 </script>
