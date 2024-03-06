@@ -179,6 +179,7 @@ export default Vue.extend({
     },
     async submit() {
       const order = {
+        code: this.$route.params.code,
         first_name: this.first_name,
         last_name: this.last_name,
         email: this.email,
@@ -187,11 +188,15 @@ export default Vue.extend({
         city: this.city,
         zip: this.zip,
         products: this.products.map((p: any) => ({
-          id: p.id,
+          product_id: p.id,
           quantity: this.quantities[p.id],
         })),
       }
-      await this.$axios.post('orders', order)
+      const { data } = await this.$axios.post('orders', order)
+      // @ts-expect-error
+      await this.$stripe.redirectToCheckout({
+        sessionId: data.id,
+      })
       this.$router.push('/success')
     },
   },
