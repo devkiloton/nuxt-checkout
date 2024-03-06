@@ -7,13 +7,7 @@
 
 <script>
 export default {
-  name: 'Test',
-  created() {},
-  data() {
-    return {}
-  },
-  props: {},
-  methods: {},
+  name: 'Error',
 }
 </script>
 
