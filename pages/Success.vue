@@ -7,13 +7,12 @@
 
 <script>
 export default {
-  name: 'Test',
-  created() {},
-  data() {
-    return {}
+  name: 'Success',
+  async mounted() {
+    await this.$axios.post('orders/confirm', {
+      source: this.$route.query.source,
+    })
   },
-  props: {},
-  methods: {},
 }
 </script>
 
